@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.wortmanstores',
+  appId: 'com.wortmanstores.jackflash',
   appName: 'Jack Flash',
   webDir: 'build'
 };
