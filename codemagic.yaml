@@ -3,9 +3,9 @@ workflows:
     name: iOS Capacitor Build
     max_build_duration: 120
     instance_type: mac_mini_m1
+    integrations:
+      app_store_connect: codemagic
     environment:
-      groups:
-        - app_store_credentials
       vars:
         XCODE_WORKSPACE: "ios/App/App.xcworkspace"
         XCODE_SCHEME: "App"
@@ -26,7 +26,7 @@ workflows:
         script: |
           cd ios/App && pod install
       
-      - name: Set up provisioning profiles
+      - name: Set up code signing
         script: |
           xcode-project use-profiles
       
@@ -34,8 +34,7 @@ workflows:
         script: |
           xcode-project build-ipa \
             --workspace "$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME" \
-            --config Release
+            --scheme "$XCODE_SCHEME"
     
     artifacts:
       - build/ios/ipa/*.ipa
