@@ -10,7 +10,7 @@ workflows:
         XCODE_WORKSPACE: "ios/App/App.xcworkspace"
         XCODE_SCHEME: "App"
         BUNDLE_ID: "com.wortmanstores.jackflash"
-	CI: "false"
+        CI: "false"
       node: latest
       xcode: latest
       cocoapods: default
