@@ -18,6 +18,10 @@ workflows:
         script: |
           npm ci
       
+      - name: Build React app
+        script: |
+          npm run build
+      
       - name: Capacitor sync
         script: |
           npx cap sync ios
