@@ -11,13 +11,16 @@ workflows:
         XCODE_SCHEME: "App"
         BUNDLE_ID: "com.wortmanstores.jackflash"
         CI: "false"
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.wortmanstores.jackflash
       node: latest
       xcode: latest
       cocoapods: default
     scripts:
       - name: Install npm dependencies
         script: |
-          npm ci
+          npm install
       
       - name: Build React app
         script: |
@@ -33,6 +36,11 @@ workflows:
       
       - name: Set up code signing
         script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create
+          keychain add-certificates
           xcode-project use-profiles
       
       - name: Build iOS app
